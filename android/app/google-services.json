@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "695009139304",
+    "firebase_url": "https://seedotaylor.firebaseio.com",
+    "project_id": "seedotaylor",
+    "storage_bucket": "seedotaylor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695009139304:android:8c5b9a2b71af85d7db39dd",
+        "android_client_info": {
+          "package_name": "com.adam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695009139304-cmlkg462cs19pjm84tsjfti2ni3ijfhe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT_3QWJ0h9NLaFw5Imd1EwmC0gvHhWLCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695009139304-cmlkg462cs19pjm84tsjfti2ni3ijfhe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

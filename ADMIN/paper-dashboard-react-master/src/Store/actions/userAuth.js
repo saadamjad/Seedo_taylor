@@ -9,27 +9,29 @@ export const Login = (loginData, history) => {
   console.log(loginData, "Login");
   return dispatch => {
     // dispatch(actionDispatch(ActionType.Login));
-    firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
-      .then((success) => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(loginData.email, loginData.password)
+      .then(success => {
         dispatch(
           actionDispatch(
             ActionType.Login_SUCCESS,
             localStorage.setItem("Login", true)
           )
         );
-        history.push("/admin/dashboard")
+        history.push("/admin/dashboard");
         // console.log("success", success)
       })
-      .catch(function (error) {
+      .catch(function(error) {
         var errorMessage = error.message;
-        console.log(errorMessage)
+        console.log(errorMessage);
         actionDispatch(
           ActionType.Login_SUCCESS,
           localStorage.setItem("Login", false)
-        )
+        );
       });
-  }
-}
+  };
+};
 
 // Add Products
 
@@ -38,14 +40,39 @@ export const AddProduct = (data, history) => {
   return dispatch => {
     // dispatch(actionDispatch(ActionType.Login));
     let db = firebase.firestore();
-    db.collection("allProducts").add(data)
-      .then(function (docRef) {
+    db.collection("allProducts")
+      .add(data)
+      .then(function(docRef) {
         // console.log("Document written with ID: ", docRef.id);
-        alert("Successfully Added")
+        alert("Successfully Added");
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.error("Error adding document: ", error);
       });
+  };
+};
 
-  }
-}
+export const GetProduct = () => {
+  return dispatch => {
+    let db = firebase.firestore();
+    let allData = [];
+    db.collection("allProducts").onSnapshot(snapshot => {
+      console.log(snapshot);
+      snapshot.forEach(val => {
+        allData.push(val.data());
+      });
+      dispatch({
+        type: ActionType.GET_PRODUCTS,
+        payload: allData
+      });
+      console.log(allData);
+    });
+    // .then(function (doc) {
+    //   console.log(doc)
+    //   alert("Successfully Got")
+    // })
+    // .catch(function (error) {
+    //   console.error("Error adding document: ", error);
+    // });
+  };
+};

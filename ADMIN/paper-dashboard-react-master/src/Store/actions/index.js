@@ -1,9 +1,11 @@
 import ActionType from "./actionType";
 import {
-  Login
+  Login,
+  GetProduct
 } from "./userAuth";
 
 export {
   Login,
+  GetProduct,
   ActionType
 };

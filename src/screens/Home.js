@@ -92,6 +92,9 @@ class Home extends React.Component {
       }, 3000)
     });
   }
+  componentDidMount(){
+    // console.warn("hello",this.props.navigation)
+  }
 
   componentWillUnmount() {
     clearInterval(this.state.interval);
@@ -164,7 +167,7 @@ class Home extends React.Component {
 
                   elevation: 4
                 }}
-                onPress={() => this.props.navigation.navigate("SelectCategory")}
+                onPress={() => this.props.navigation.navigate("SelectCategory", {type: Item.ProductName })}
               >
                 <View style={{ height: "75%", width: "100%", borderWidth: 0 }}>
                   <Image

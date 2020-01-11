@@ -198,8 +198,10 @@ class Signup extends React.Component {
               alignSelf: "center",
               marginTop: 50
             }}
-            onPress={() => this.onsubmit()}
-            // onPress={() => this.props.navigation.navigate("Home")}
+            // onPress={() => this.onsubmit()}
+            onPress={() => this.props.navigation.navigate("Home")
+          
+          }
           >
             <LinearGradient
               colors={["#eb2874", "#eb274b"]}

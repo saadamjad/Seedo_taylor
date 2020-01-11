@@ -15,8 +15,10 @@ import GloabalHeader from "../components/GlobalHeader";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { Item } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
-
-export default class Home extends React.Component {
+import { bindActionCreators } from "redux";
+import * as reduxActions from "../redux/actions/actions";
+import { connect } from "react-redux";
+class Home extends React.Component {
   state = {
     LocalBrand: [
       {
@@ -29,32 +31,35 @@ export default class Home extends React.Component {
 
         image: require("../../assets/images/trausers.jpeg")
       },
-      {
-        ProductName: "Pents",
 
-        image: require("../../assets/images/pentss.jpeg")
-      },
-      {
-        ProductName: "jackets",
-        image: require("../../assets/images/spiderman.jpg")
-      },
-      {
-        ProductName: "coat",
+    ],
+    Allproducts: []
 
-        image: require("../../assets/images/formal.jpg")
-      },
-      {
-        ProductName: "shirts",
-
-        image: require("../../assets/images/images(3).jpg")
-      }
-      // {
-      //   ProductName: "Design 6",
-
-      //   image: require("../../assets/images/kurta1.jpg")
-      // }
-    ]
   };
+  componentDidMount() {
+    console.warn("Get Navigation", this.props.navigation)
+    this.props.reduxActions.GetProductapp()
+
+  }
+  componentWillReceiveProps(props) {
+    if (props.reduxState.products) {
+      let Allproducts = []; 
+      props.reduxState.products.filter(val => {
+        // let ware = this.props.navigation.state.params.type;
+        // console.warn(val.gender == this.props.navigation.state.params.previousType, val.ware, this.props.navigation.state.params.type)
+        if (val.gender == this.props.navigation.state.params.previousType && val.ware == this.props.navigation.state.params.type) {
+          Allproducts.push(val);
+          // console.warn("Haa hun me")
+        }
+      })
+      this.setState({
+        Allproducts
+      })
+    }
+
+  }
+
+
 
   render() {
     return (
@@ -82,7 +87,7 @@ export default class Home extends React.Component {
               backgroundColor: "white"
             }}
           >
-            {this.state.LocalBrand.map((Item, data) => {
+            {this.state.Allproducts ? this.state.Allproducts.map((Item, data) => {
               return (
                 <TouchableOpacity
                   style={{
@@ -111,14 +116,14 @@ export default class Home extends React.Component {
                     elevation: 4
                   }}
                   onPress={() =>
-                    this.props.navigation.navigate("PersonalizedScrubSizes")
+                    this.props.navigation.navigate("PersonalizedScrubSizes", {data: Item})
                   }
                 >
                   <View
                     style={{ height: "75%", width: "100%", borderWidth: 0 }}
                   >
                     <Image
-                      source={(source = Item.image)}
+                      source={{ uri: Item.allImages[0].path }}
                       style={{ width: "100%", height: "100%" }}
                       resizeMode="contain"
                     />
@@ -133,14 +138,24 @@ export default class Home extends React.Component {
                       paddingVertical: 13
                     }}
                   >
-                    {Item.ProductName}
+                    {Item.productName}
                   </Text>
                 </TouchableOpacity>
               );
-            })}
+            }): <View> <Text> No Products </Text> </View>}
           </View>
         </ScrollView>
       </View>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  reduxState: state.reducers
+});
+
+const mapDispatchToProps = dispatch => ({
+  reduxActions: bindActionCreators(reduxActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

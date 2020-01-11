@@ -38,12 +38,10 @@ export const Login = (loginData, history) => {
 export const AddProduct = (data, history) => {
   console.log(data, "Login");
   return dispatch => {
-    // dispatch(actionDispatch(ActionType.Login));
     let db = firebase.firestore();
     db.collection("allProducts")
       .add(data)
       .then(function(docRef) {
-        // console.log("Document written with ID: ", docRef.id);
         alert("Successfully Added");
       })
       .catch(function(error) {

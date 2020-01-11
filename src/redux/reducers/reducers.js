@@ -5,7 +5,7 @@ const initialState = {
   activityIndicatorText: "",
   theme: false,
   userData: {},
-  products: false,
+  products: [],
   cart: { products: [], subTotal: 0, shipmentTotal: 0 },
   AIData: []
 };
@@ -31,6 +31,12 @@ export default function(state = initialState, action) {
         ...state,
         userData: action.payload
       };
+      case actionTypes.GET_PRODUCT:
+     //   console.warn("this. prduct",action.payload)
+        return{
+          ...state,
+          products:action.payload,
+        }
 
     default:
       return state;

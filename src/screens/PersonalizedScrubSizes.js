@@ -27,6 +27,9 @@ export default class Home extends React.Component {
       }
     ]
   };
+  componentDidMount(){
+    console.warn("sss",this.props.navigation)
+  }
 
   render() {
     return (

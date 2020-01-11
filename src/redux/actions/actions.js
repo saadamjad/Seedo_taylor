@@ -201,3 +201,27 @@ export const checkUser = navigation => async dispatch => {
     }
   });
 };
+
+export const GetProductapp  = navigation => async dispatch => {
+  console.warn("helloo1")
+  dispatch({ type: actionTypes.START_LOADING });
+
+
+  let obj = firebase.firestore();
+  obj.collection("allProducts").onSnapshot(objdata =>{
+    let AllData =[];
+    //console.warn(data)
+    objdata.forEach(val =>{
+      AllData.push(val.data());
+    })
+   // console.warn("ALL DATA ",AllData)
+      dispatch({
+        type : actionTypes.GET_PRODUCT,
+        payload:AllData
+      }) ;
+  })
+
+
+
+
+};

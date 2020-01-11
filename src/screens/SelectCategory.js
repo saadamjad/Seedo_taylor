@@ -25,18 +25,18 @@ export default class Home extends React.Component {
         image: require("../../assets/images/kurta1.jpg")
       },
       {
-        ProductName: " Daily Wear  ",
+        ProductName: "Daily Wear",
 
         image: require("../../assets/images/Deadpool_Leather_Jacket.jpg")
       },
       {
-        ProductName: "Formal Wear  ",
+        ProductName: "Formal Ware",
 
         image: require("../../assets/images/formal.jpg")
       },
 
       {
-        ProductName: "Party Wear ",
+        ProductName: "Party Ware",
 
         image: require("../../assets/images/partywear.jpg")
       },
@@ -52,7 +52,9 @@ export default class Home extends React.Component {
       //   }
     ]
   };
-
+componentDidMount(){
+ // console.warn("navigation",this.props.navigation)
+}
   render() {
     return (
       <View
@@ -108,7 +110,7 @@ export default class Home extends React.Component {
                     elevation: 4
                   }}
                   onPress={() =>
-                    this.props.navigation.navigate("SelectAttaire")
+                    this.props.navigation.navigate("SelectAttaire", {type: Item.ProductName ,previousType: this.props.navigation.state.params.type} )
                   }
                 >
                   <View

@@ -1,7 +1,6 @@
 package com.adam;
 
 import android.app.Application;
-
 import com.facebook.react.ReactApplication;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.devfd.RNGeocoder.RNGeocoderPackage;

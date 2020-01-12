@@ -16,33 +16,25 @@ import LinearGradient from "react-native-linear-gradient";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { Item } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
+import { bindActionCreators } from "redux";
+import * as reduxActions from "../redux/actions/actions";
+import { connect } from "react-redux";
 
-export default class Home extends React.Component {
+
+class Home extends React.Component {
   state = {
-    LocalBrand: [
-      {
-        Category: "Fabric + Sample collection",
-        Description:
-          "aylor’s signature shape embodies the ultimate all-purpose acoustic.",
-
-        image: require("../../assets/images/images(3).jpg")
-      }
-      //   {
-      //     Category: "Share Measurements",
-      //     Description:
-      //       "aylor’s signature shape embodies the ultimate all-purpose acoustic.",
-
-      //     image: require("../../assets/images/images(3).jpg")
-      //   },
-      //   {
-      //     Category: "Existing Profile",
-      //     Description:
-      //       "aylor’s signature shape embodies the ultimate all-purpose acoustic.",
-
-      //     image: require("../../assets/images/images(3).jpg")
-      //   }
-    ]
+    LocalBrand:
+    {
+    }
   };
+  componentWillMount() {
+    // console.warn("sss", this.props.navigation);
+    if (this.props.reduxState.measurements && this.props.reduxState.measurements !== {}) {
+      this.setState({
+        LocalBrand: this.props.reduxState.measurements
+      })
+    }
+  }
 
   render() {
     return (
@@ -88,7 +80,7 @@ export default class Home extends React.Component {
                   elevation: 4
                 }}
                 onPress={() =>
-                  this.props.navigation.navigate("Specialinstructions")
+                  this.props.navigation.navigate("Specialinstructions",{index: data} )
                 }
               >
                 <View
@@ -101,7 +93,7 @@ export default class Home extends React.Component {
                   }}
                 >
                   <Image
-                    source={(source = Item.image)}
+                    source={{ uri: Item.allImages[0].path }}
                     style={{ width: "80%", height: "80%" }}
                     resizeMode="contain"
                   />
@@ -127,7 +119,7 @@ export default class Home extends React.Component {
                       width: "90%"
                     }}
                   >
-                    {Item.Category}
+                    {Item.productName}
                   </Text>
                   <Text
                     style={{
@@ -139,7 +131,7 @@ export default class Home extends React.Component {
                       //  textAlign: "center",
                     }}
                   >
-                    {Item.Description}
+                    {Item.description}
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -150,3 +142,13 @@ export default class Home extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  reduxState: state.reducers
+});
+
+const mapDispatchToProps = dispatch => ({
+  reduxActions: bindActionCreators(reduxActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

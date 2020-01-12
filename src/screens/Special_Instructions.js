@@ -208,7 +208,7 @@ export default class Home extends React.Component {
               alignSelf: "center",
               marginTop: 50
             }}
-            onPress={() => this.props.navigation.navigate("CheckOut")}
+            onPress={() => this.props.navigation.navigate("CheckOut", {index: this.props.navigation.state.params.index})}
           >
             <LinearGradient
               colors={["#eb2874", "#eb274b"]}

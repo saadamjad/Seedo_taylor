@@ -57,33 +57,17 @@ class Signup extends React.Component {
   };
 
   onsubmit = () => {
-    if (
-      (this.state.firstName === "" ||
-        this.state.emailAddress === "" ||
-        this.state.password === "" ||
-        this.state.Lastname === "",
-      this.state.StreetAddress === "" ||
-        this.state.country === "" ||
-        this.state.city === "" ||
-        this.state.ContactNo === "")
-    ) {
-      this.setState({ error: "Kindly Fill All The Fields" });
-    } else if (this.state.validEmail === false) {
-      this.setState({ error: "Kindly Enter Correct Email" });
-    } else {
-      this.setState({ error: false });
-      this.props.navigation.navigate("Specialinstructions");
-      //   let userData = {
-      //     firstName: this.state.firstName,
-      //     Lastname: this.state.Lastname,
-      //     emailAddress: this.state.emailAddress,
-      //     password: this.state.password
-      //   };
-      // this.props.reduxActions.signup(this.props.navigation, userData);
-    }
+    let data = this.state.data;
+    this.props.reduxActions.AddOrder({...data, user: this.props.reduxState.userData.uid}, this.props.navigation)
+    this.props.reduxActions.emptyMeasurement(this.props.navigation.state.params.index)
   };
 
+  componentDidMount() {
+    this.setState({ data: this.props.navigation.state.params.data })
+  }
+
   render() {
+    let { data } = this.state;
     return (
       <Container
         style={{
@@ -128,7 +112,7 @@ class Signup extends React.Component {
                   borderColor: "#eeeeee"
                 }}
               >
-                Gulshan iqbal block seven gulzrehjri karachi scheeme 33
+                {data !== undefined && data.StreetAddress}
               </Text>
             </View>
 
@@ -164,7 +148,7 @@ class Signup extends React.Component {
                   borderColor: "#eeeeee"
                 }}
               >
-                Gulshan iqbal block seven gulzrehjri karachi scheeme 33
+                {data !== undefined && data.StreetAddress}
               </Text>
             </View>
 
@@ -200,7 +184,7 @@ class Signup extends React.Component {
                   borderColor: "#eeeeee"
                 }}
               >
-                99999999
+                {data !== undefined && data.ContactNo}
               </Text>
             </View>
 
@@ -251,7 +235,7 @@ class Signup extends React.Component {
                   borderColor: "#eeeeee"
                 }}
               >
-                Personalized Scrubs {"\n"} " M "
+                {data !== undefined && data.product.productName}
               </Text>
               <Text
                 style={{
@@ -261,7 +245,7 @@ class Signup extends React.Component {
                   textAlign: "right"
                 }}
               >
-                Rs. 300
+                Rs. {data !== undefined && data.product.price}
               </Text>
             </View>
             <View
@@ -296,7 +280,7 @@ class Signup extends React.Component {
                   textAlign: "right"
                 }}
               >
-                Rs. 300 {"\n "}{" "}
+                Rs. {data !== undefined && data.product.price} {"\n "}{" "}
                 <Text
                   style={{
                     fontSize: 12,
@@ -315,8 +299,8 @@ class Signup extends React.Component {
                 alignSelf: "center",
                 marginTop: 20
               }}
-              // onPress={() => this.onsubmit()}
-              onPress={() => this.props.navigation.navigate("ConfirmedOrder")}
+              onPress={() => this.onsubmit()}
+              // onPress={() => this.props.navigation.navigate("ConfirmedOrder")}
             >
               <LinearGradient
                 colors={["#eb2874", "#eb274b"]}

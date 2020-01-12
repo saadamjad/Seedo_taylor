@@ -48,13 +48,25 @@ class Signup extends React.Component {
     }
   };
 
+  componentWillMount() {
+    if (this.props.reduxState.userData) {
+      let user = this.props.reduxState.userData;
+      this.setState({
+        emailAddress: user.emailAddress,
+        fullName: user.fullName,
+        validEmail: true
+
+      })
+    } else {
+      console.warn(this.props.reduxState)
+    }
+  }
+
   onsubmit = () => {
     if (
-      (this.state.firstName === "" ||
+      (this.state.fullName === "" ||
         this.state.emailAddress === "" ||
-        this.state.password === "" ||
-        this.state.Lastname === "",
-      this.state.StreetAddress === "" ||
+        this.state.StreetAddress === "" ||
         this.state.country === "" ||
         this.state.city === "" ||
         this.state.ContactNo === "")
@@ -64,14 +76,16 @@ class Signup extends React.Component {
       this.setState({ error: "Kindly Enter Correct Email" });
     } else {
       this.setState({ error: false });
-      this.props.navigation.navigate("Specialinstructions");
-      //   let userData = {
-      //     firstName: this.state.firstName,
-      //     Lastname: this.state.Lastname,
-      //     emailAddress: this.state.emailAddress,
-      //     password: this.state.password
-      //   };
-      // this.props.reduxActions.signup(this.props.navigation, userData);
+      let data = {
+        fullName: this.state.fullName,
+        emailAddress: this.state.emailAddress,
+        StreetAddress: this.state.StreetAddress,
+        country: this.state.country,
+        city: this.state.city,
+        ContactNo: this.state.ContactNo,
+        product: this.props.reduxState.measurements[this.props.navigation.state.params.index]
+      }
+      this.props.navigation.navigate("ReviewOrder", { data, index: this.props.navigation.state.params.index});
     }
   };
 
@@ -113,21 +127,22 @@ class Signup extends React.Component {
             >
               <View
                 style={{
-                  width: "42%",
+                  width: "100%",
                   borderBottomWidth: 0.5,
                   height: "100%",
                   borderColor: "#e0e0e0"
                 }}
               >
-                <Text>First Name </Text>
+                <Text>Full Name </Text>
                 <TextInput
                   placeholder="Enter first name "
                   style={{ borderBottomWidth: 0, marginTop: 0 }}
-                  onChangeText={text => this.setState({ firstName: text })}
-                  // onChangeText={text => this.setState({ firstName: text })}
+                  value={this.state.fullName}
+                  onChangeText={text => this.setState({ fullName: text })}
+                // onChangeText={text => this.setState({ firstName: text })}
                 />
               </View>
-              <View
+              {/* <View
                 style={{
                   width: "42%",
                   borderBottomWidth: 0.5,
@@ -143,7 +158,7 @@ class Signup extends React.Component {
                     this.setState({ Lastname: LastText })
                   }
                 />
-              </View>
+              </View> */}
             </View>
 
             <View
@@ -164,6 +179,8 @@ class Signup extends React.Component {
                   marginLeft: 0,
                   padding: 0
                 }}
+                value={this.state.emailAddress}
+
                 onChangeText={text => this.emailChange(text)}
               />
             </View>
@@ -334,7 +351,7 @@ class Signup extends React.Component {
                     marginLeft: 0,
                     padding: 0
                   }}
-                  // onChangeText={text => this.setState({ ContactNo: text })}
+                // onChangeText={text => this.setState({ ContactNo: text })}
                 />
               </View>
             </View>
@@ -345,8 +362,8 @@ class Signup extends React.Component {
                 alignSelf: "center",
                 marginTop: 20
               }}
-              // onPress={() => this.onsubmit()}
-              onPress={() => this.props.navigation.navigate("ReviewOrder")}
+              onPress={() => this.onsubmit()}
+            // onPress={() => this.props.navigation.navigate("ReviewOrder")}
             >
               <LinearGradient
                 colors={["#eb2874", "#eb274b"]}

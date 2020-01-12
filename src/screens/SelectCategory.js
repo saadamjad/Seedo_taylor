@@ -30,13 +30,13 @@ export default class Home extends React.Component {
         image: require("../../assets/images/Deadpool_Leather_Jacket.jpg")
       },
       {
-        ProductName: "Formal Ware",
+        ProductName: "Formal Wear",
 
         image: require("../../assets/images/formal.jpg")
       },
 
       {
-        ProductName: "Party Ware",
+        ProductName: "Party Wear",
 
         image: require("../../assets/images/partywear.jpg")
       },

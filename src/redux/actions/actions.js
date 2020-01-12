@@ -224,12 +224,54 @@ export const ProductDiscription = (
   navigation,
   desctiption
 ) => async dispatch => {
-  console.warn("yee haaaa final", desctiption);
+  navigation.navigate(
+    "PersonalizedScrubSizes"
+  );
   dispatch({ type: actionTypes.PRODUCT_DISCRIPTIONS, payload: desctiption });
-  NavigationActions.navigate({
-    routeName: "PersonalizedScrubSizes"
-  });
 };
+
+export const emptyMeasurement = (id
+) => async dispatch => {
+  if(id){
+  dispatch({ type: actionTypes.EMPTY_MEASUREMENT, payload: id });
+  }else{
+    dispatch({ type: actionTypes.EMPTY_MEASUREMENT });
+  }
+};
+
+export const AddOrder = (data, navigation) =>
+  async dispatch => {
+    let db = firebase.firestore();
+    db.collection("Order")
+      .add({ ...data, status: "pending" })
+      .then(function (docRef) {
+        alert("Order Success"); 
+        navigation.navigate("ConfirmedOrder")
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
+  };
+
+  export const GetOrder = navigation => async dispatch => {
+    //console.warn("helloo1");
+    dispatch({ type: actionTypes.START_LOADING });
+  
+    let obj = firebase.firestore();
+    obj.collection("Order").onSnapshot(objdata => {
+      let AllData = [];
+      //console.warn(data)
+      objdata.forEach(val => {
+        AllData.push(val.data());
+      });
+      // console.warn("ALL DATA ",AllData)
+      dispatch({
+        type: actionTypes.GET_ORDER,
+        payload: AllData
+      });
+    });
+  };
+
 
 ///  ye error q derah hy solve karo?
 // ub thek haina hn

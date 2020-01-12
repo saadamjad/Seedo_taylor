@@ -25,10 +25,10 @@ class Login extends React.Component {
     super();
     this.state = {
       check: true,
-      emailAddress: "",
-      password: "",
+      emailAddress: "saad@gmail.com",
+      password: "12345678",
       error: false,
-      validEmail: ""
+      validEmail: true
     };
   }
 
@@ -196,8 +196,8 @@ class Login extends React.Component {
               alignSelf: "center",
               marginTop: 50
             }}
-          //  onPress={() => this.signin()}
-            onPress={() => this.props.navigation.navigate("SignUp")}
+           onPress={() => this.signin()}
+            // onPress={() => this.props.navigation.navigate("SignUp")}
           >
             <LinearGradient
               colors={["#eb2874", "#eb274b"]}
@@ -338,8 +338,9 @@ class Login extends React.Component {
               }}
               onPress={() => {
                 // setLang("en");
-                // this.forceUpdate();
+                // // this.forceUpdate();
                 this.props.navigation.navigate("SignUp");
+                // this.signin()
               }}
             >
               {/* {strings("login.signup_button")} */}

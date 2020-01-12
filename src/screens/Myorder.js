@@ -16,8 +16,11 @@ import LinearGradient from "react-native-linear-gradient";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { Item } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
+import { bindActionCreators } from "redux";
+import * as reduxActions from "../redux/actions/actions";
+import { connect } from "react-redux";
 
-export default class Home extends React.Component {
+class Home extends React.Component {
   state = {
     MyOrder: [
       {
@@ -51,6 +54,27 @@ export default class Home extends React.Component {
     ]
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reduxState.orders && nextProps.reduxState.orders.length) {
+      let order = [];
+      let orderData = nextProps.reduxState.orders;
+      orderData.filter(val => {
+        if (val.user == nextProps.reduxState.userData.uid) {
+          order.push(val);
+        }
+      })
+      this.setState({
+        order
+      })
+    }
+  }
+
+
+  componentDidMount() {
+    this.props.reduxActions.GetOrder()
+
+  }
+
   render() {
     return (
       <View
@@ -65,7 +89,7 @@ export default class Home extends React.Component {
             navigation={this.props.navigation}
           />
 
-          {this.state.MyOrder.map((Item, i) => {
+          {this.state.order && this.state.order.length ? this.state.order.map((Item, i) => {
             return (
               <TouchableOpacity
                 style={{
@@ -91,7 +115,7 @@ export default class Home extends React.Component {
                   }}
                 >
                   <Image
-                    source={Item.image}
+                    source={{ uri: Item.product.allImages.length && Item.product.allImages[0].path }}
                     style={{ width: "90%", height: "90%" }}
                     resizeMode="contain"
                   />
@@ -112,7 +136,7 @@ export default class Home extends React.Component {
                       fontWeight: "bold"
                     }}
                   >
-                    Order # {Item.OrderID}
+                    Order # {i + 1}
                   </Text>
                 </View>
                 <View
@@ -137,24 +161,33 @@ export default class Home extends React.Component {
                   <Text
                     style={{
                       color:
-                        Item.Status == "Pending"
+                        Item.status == "pending"
                           ? "red"
-                          : Item.Status == "Delivered"
-                          ? "blue"
-                          : Item.Status == "Cancelled"
-                          ? "black"
-                          : null
+                          : Item.status == "delivered"
+                            ? "blue"
+                            : Item.status == "cancelled"
+                              ? "black"
+                              : null
                     }}
                   >
                     {" "}
-                    {Item.Status}{" "}
+                    {Item.status}{" "}
                   </Text>
                 </View>
               </TouchableOpacity>
-            );
-          })}
+            )
+          }) : <Text>There is no order</Text>}
         </ScrollView>
       </View>
     );
   }
 }
+const mapStateToProps = state => ({
+  reduxState: state.reducers
+});
+
+const mapDispatchToProps = dispatch => ({
+  reduxActions: bindActionCreators(reduxActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

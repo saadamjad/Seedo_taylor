@@ -72,11 +72,7 @@ class Home extends React.Component {
 
         image: require("../../assets/images/images.jpg")
       },
-      {
-        ProductName: "Leather",
-
-        image: require("../../assets/images/jackeet.jpg")
-      }
+     
     ]
   };
 

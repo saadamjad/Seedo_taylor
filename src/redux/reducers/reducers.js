@@ -9,10 +9,12 @@ const initialState = {
   products: [],
   cart: { products: [], subTotal: 0, shipmentTotal: 0 },
   AIData: [],
-  productsDiscriptions: []
+  measurements: [],
+  productsDiscriptions: {}
+  , orders: []
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.START_LOADING:
       return {
@@ -41,11 +43,31 @@ export default function(state = initialState, action) {
       };
     case actionTypes.PRODUCT_DISCRIPTIONS: // ye description name ka q dya hy?
       /// jo b thek krooo
-
-      console.log("this is reducerrrrrr", action.payload);
       return {
         ...state,
-        productsDiscriptions: action.payload
+        productsDiscriptions: action.payload,
+        measurements: [...state.measurements, action.payload]
+      };
+    case actionTypes.EMPTY_MEASUREMENT:
+      if (action.payload) {
+        // alert("run")
+        let mj = state.measurements;
+        mj.splice(action.payload, 1)
+        return {
+          ...state,
+          measurements: mj
+        };
+      } else {
+        return {
+          ...state,
+          measurements: []
+        };
+      }
+    case actionTypes.GET_ORDER:
+
+      return {
+        ...state,
+        orders: action.payload,
       };
 
     default:

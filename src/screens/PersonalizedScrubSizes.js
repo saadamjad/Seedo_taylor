@@ -22,16 +22,15 @@ import { connect } from "react-redux";
 
 class Home extends React.Component {
   state = {
-    LocalBrand: [
-      {
-        ProductName: "Shirts",
-
-        image: require("../../assets/images/images(3).jpg")
-      }
-    ]
+    LocalBrand: {}
   };
   componentDidMount() {
-    console.warn("sss", this.props.navigation);
+    // console.warn("sss", this.props.navigation);
+    if (this.props.reduxState.productsDiscriptions && this.props.reduxState.productsDiscriptions !== {}) {
+      this.setState({
+        LocalBrand: this.props.reduxState.productsDiscriptions
+      })
+    }
   }
 
   render() {
@@ -40,7 +39,7 @@ class Home extends React.Component {
         style={{
           flex: 1
         }}
-      >
+      >{this.props.reduxState.productsDiscriptions && this.props.reduxState.productsDiscriptions !== {} ?
         <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 20 }}>
           <GloabalHeader
             navigation={this.props.navigation}
@@ -50,56 +49,57 @@ class Home extends React.Component {
             headingText="Personalized ScrubSizes"
           />
 
-          {this.state.LocalBrand.map((Item, data) => {
-            return (
-              <TouchableOpacity
-                style={{
-                  elevation: 0,
-                  // height: 100,
-                  alignSelf: "center",
-                  backgroundColor: "white",
-                  // alignItems: "center",
-                  justifyContent: "center",
-                  marginVertical: 2,
-                  width: "90%",
-                  borderRadius: 10,
-                  paddingVertical: 10,
-                  overflow: "hidden",
-                  shadowColor: "#f3f3f3",
-                  marginBottom: 17,
-                  height: 400,
 
-                  shadowOffset: {
-                    width: 0,
-                    height: 4
-                  },
-                  shadowOpacity: 0.52,
-                  shadowRadius: 20,
+          <TouchableOpacity
+            style={{
+              elevation: 0,
+              // height: 100,
+              alignSelf: "center",
+              backgroundColor: "white",
+              // alignItems: "center",
+              justifyContent: "center",
+              marginVertical: 2,
+              width: "90%",
+              borderRadius: 10,
+              paddingVertical: 10,
+              overflow: "hidden",
+              shadowColor: "#f3f3f3",
+              marginBottom: 17,
+              height: 400,
 
-                  elevation: 4
-                }}
-                onPress={() => this.props.navigation.navigate("")}
-              >
-                <View
-                  style={{
-                    height: "100%",
-                    width: "100%",
-                    borderWidth: 0,
-                    alignItems: "center",
-                    justifyContent: "center"
-                  }}
-                >
-                  <Image
-                    source={(source = Item.image)}
-                    style={{ width: "80%", height: "80%" }}
-                    resizeMode="contain"
-                  />
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+              shadowOffset: {
+                width: 0,
+                height: 4
+              },
+              shadowOpacity: 0.52,
+              shadowRadius: 20,
+
+              elevation: 4
+            }}
+            onPress={() => this.props.navigation.navigate("")}
+          >
             <View
+              style={{
+                height: "100%",
+                width: "100%",
+                borderWidth: 0,
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <Image
+                source={{ uri: this.state.LocalBrand && this.state.LocalBrand.allImages && this.state.LocalBrand.allImages.length && this.state.LocalBrand.allImages[0].path }}
+                style={{ width: "80%", height: "80%" }}
+                resizeMode="contain"
+              />
+            </View>
+          </TouchableOpacity>
+
+          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+            {this.state.LocalBrand &&
+            this.state.LocalBrand.allImages &&
+           this.state.LocalBrand.allImages.length &&
+            this.state.LocalBrand.allImages.map((val) => (<View
               style={{
                 width: 60,
                 height: 70,
@@ -108,8 +108,14 @@ class Home extends React.Component {
                 borderRightWidth: 1,
                 marginRight: 10
               }}
-            ></View>
-            <View
+            >
+              <Image
+                source={{ uri: val.path }}
+                style={{ width: "100%", height: "100%" }}
+                resizeMode="contain"
+              />
+            </View>))}
+            {/* <View
               style={{
                 width: 60,
                 height: 70,
@@ -117,7 +123,7 @@ class Home extends React.Component {
 
                 borderColor: "#e4e4e4"
               }}
-            ></View>
+            ></View> */}
           </View>
 
           <View style={{ paddingLeft: 5, paddingRight: 5 }}>
@@ -125,11 +131,11 @@ class Home extends React.Component {
               style={{
                 fontSize: 20,
                 fontWeight: "300",
-                color: "black"
+                color: "black", 
+                marginLeft: 10
               }}
             >
-              {" "}
-              Personalized scrubs 'M'{" "}
+             {this.state.LocalBrand && this.state.LocalBrand.productName}
             </Text>
             <Text
               style={{
@@ -139,12 +145,10 @@ class Home extends React.Component {
               }}
             >
               {" "}
-              Rs. 330
+              Rs.   {this.state.LocalBrand && this.state.LocalBrand.price}
             </Text>
-            <Text> - custom-made and Personalized scrubs from male </Text>
-            <Text> - custom-made and Personalized scrubs from male </Text>
-            <Text> - custom-made and Personalized scrubs from male </Text>
-            <Text> - custom-made and Personalized scrubs from male </Text>
+            <Text>   {this.state.LocalBrand && this.state.LocalBrand.description} </Text>
+          
             <View
               style={{
                 paddingVertical: 20,
@@ -158,7 +162,7 @@ class Home extends React.Component {
             >
               <Text style={{ color: "black", fontSize: 18 }}> Total </Text>
               <View style={{ position: "absolute", right: 0 }}>
-                <Text> Rs :330</Text>
+                <Text> Rs :  {this.state.LocalBrand && this.state.LocalBrand.price}</Text>
                 <Text style={{ color: "#a5a5a5", fontSize: 10 }}>
                   {" "}
                   (inclusive all taxes )
@@ -197,7 +201,7 @@ class Home extends React.Component {
               </LinearGradient>
             </TouchableOpacity>
           </View>
-        </ScrollView>
+        </ScrollView> : <Text>Please Select Item</Text>}
       </View>
     );
   }

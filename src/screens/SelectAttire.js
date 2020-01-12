@@ -50,16 +50,23 @@ class Home extends React.Component {
         ) {
           Allproducts.push(val);
           // console.log("this is vall", val);
-          this.props.reduxActions.ProductDiscription(
-            this.props.navigation,
-            val
-          );
+          // this.props.reduxActions.ProductDiscription(
+          //   this.props.navigation,
+          //   val
+          // );
         }
       });
       this.setState({
         Allproducts
       });
     }
+  }
+
+  goToDetailScreen = (val) => {
+    this.props.reduxActions.ProductDiscription(
+      this.props.navigation,
+      val
+    );
   }
 
   render() {
@@ -118,9 +125,7 @@ class Home extends React.Component {
                       elevation: 4
                     }}
                     onPress={() =>
-                      this.props.navigation.navigate("PersonalizedScrubSizes", {
-                        data: Item
-                      })
+                      this.goToDetailScreen(Item)
                     }
                   >
                     <View
@@ -148,11 +153,11 @@ class Home extends React.Component {
                 );
               })
             ) : (
-              <View>
-                {" "}
-                <Text> No Products </Text>{" "}
-              </View>
-            )}
+                <View>
+                  {" "}
+                  <Text> No Products </Text>{" "}
+                </View>
+              )}
           </View>
         </ScrollView>
       </View>

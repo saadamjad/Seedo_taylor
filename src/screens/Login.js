@@ -25,10 +25,10 @@ class Login extends React.Component {
     super();
     this.state = {
       check: true,
-      emailAddress: "saad@gmail.com",
-      password: "12345678",
+      emailAddress: "",
+      password: "",
       error: false,
-      validEmail: true
+      validEmail: false
     };
   }
 

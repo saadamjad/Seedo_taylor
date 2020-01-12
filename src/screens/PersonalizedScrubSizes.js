@@ -16,8 +16,11 @@ import LinearGradient from "react-native-linear-gradient";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { Item } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
+import { bindActionCreators } from "redux";
+import * as reduxActions from "../redux/actions/actions";
+import { connect } from "react-redux";
 
-export default class Home extends React.Component {
+class Home extends React.Component {
   state = {
     LocalBrand: [
       {
@@ -27,8 +30,8 @@ export default class Home extends React.Component {
       }
     ]
   };
-  componentDidMount(){
-    console.warn("sss",this.props.navigation)
+  componentDidMount() {
+    console.warn("sss", this.props.navigation);
   }
 
   render() {
@@ -199,3 +202,13 @@ export default class Home extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  reduxState: state.reducers
+});
+
+const mapDispatchToProps = dispatch => ({
+  reduxActions: bindActionCreators(reduxActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

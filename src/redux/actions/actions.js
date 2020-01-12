@@ -202,26 +202,34 @@ export const checkUser = navigation => async dispatch => {
   });
 };
 
-export const GetProductapp  = navigation => async dispatch => {
-  console.warn("helloo1")
+export const GetProductapp = navigation => async dispatch => {
+  //console.warn("helloo1");
   dispatch({ type: actionTypes.START_LOADING });
 
-
   let obj = firebase.firestore();
-  obj.collection("allProducts").onSnapshot(objdata =>{
-    let AllData =[];
+  obj.collection("allProducts").onSnapshot(objdata => {
+    let AllData = [];
     //console.warn(data)
-    objdata.forEach(val =>{
+    objdata.forEach(val => {
       AllData.push(val.data());
-    })
-   // console.warn("ALL DATA ",AllData)
-      dispatch({
-        type : actionTypes.GET_PRODUCT,
-        payload:AllData
-      }) ;
-  })
-
-
-
-
+    });
+    // console.warn("ALL DATA ",AllData)
+    dispatch({
+      type: actionTypes.GET_PRODUCT,
+      payload: AllData
+    });
+  });
 };
+export const ProductDiscription = (
+  navigation,
+  desctiption
+) => async dispatch => {
+  console.warn("yee haaaa final", desctiption);
+  dispatch({ type: actionTypes.PRODUCT_DISCRIPTIONS, payload: desctiption });
+  NavigationActions.navigate({
+    routeName: "PersonalizedScrubSizes"
+  });
+};
+
+///  ye error q derah hy solve karo?
+// ub thek haina hn

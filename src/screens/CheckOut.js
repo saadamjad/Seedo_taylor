@@ -10,22 +10,11 @@ import {
   ScrollView,
   SafeAreaView
 } from "react-native";
-import {
-  Container,
-  Content,
-  Form,
-  Item,
-  Input,
-  Label,
-  Thumbnail
-} from "native-base";
+import { Container, Content } from "native-base";
 import { CheckBox } from "react-native-elements";
 import Loader from "../components/Loader";
 import GloabalHeader from "../components/GlobalHeader";
-import GloabalButton from "../components/GlobalButton";
-import Entypo from "react-native-vector-icons/Entypo";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 import { bindActionCreators } from "redux";
 
 import LinearGradient from "react-native-linear-gradient";

@@ -1,4 +1,5 @@
 import * as actionTypes from "../actions/types";
+import { ActionSheet } from "native-base";
 
 const initialState = {
   loading: false,
@@ -7,7 +8,8 @@ const initialState = {
   userData: {},
   products: [],
   cart: { products: [], subTotal: 0, shipmentTotal: 0 },
-  AIData: []
+  AIData: [],
+  productsDiscriptions: []
 };
 
 export default function(state = initialState, action) {
@@ -31,12 +33,20 @@ export default function(state = initialState, action) {
         ...state,
         userData: action.payload
       };
-      case actionTypes.GET_PRODUCT:
-     //   console.warn("this. prduct",action.payload)
-        return{
-          ...state,
-          products:action.payload,
-        }
+    case actionTypes.GET_PRODUCT:
+      //   console.warn("this. prduct",action.payload)
+      return {
+        ...state,
+        products: action.payload
+      };
+    case actionTypes.PRODUCT_DISCRIPTIONS: // ye description name ka q dya hy?
+      /// jo b thek krooo
+
+      console.log("this is reducerrrrrr", action.payload);
+      return {
+        ...state,
+        productsDiscriptions: action.payload
+      };
 
     default:
       return state;

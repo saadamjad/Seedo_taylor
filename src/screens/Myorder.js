@@ -62,17 +62,15 @@ class Home extends React.Component {
         if (val.user == nextProps.reduxState.userData.uid) {
           order.push(val);
         }
-      })
+      });
       this.setState({
         order
-      })
+      });
     }
   }
 
-
   componentDidMount() {
-    this.props.reduxActions.GetOrder()
-
+    this.props.reduxActions.GetOrder();
   }
 
   render() {
@@ -89,94 +87,122 @@ class Home extends React.Component {
             navigation={this.props.navigation}
           />
 
-          {this.state.order && this.state.order.length ? this.state.order.map((Item, i) => {
-            return (
-              <TouchableOpacity
-                style={{
-                  width: "90%",
-                  backgroundColor: "#ffff",
-                  alignSelf: "center",
-                  borderRadius: 10,
-                  marginVertical: 8,
-                  paddingVertical: 15,
-                  overflow: "hidden",
-                  flexDirection: "row",
-                  elevation: 4,
-                  height: 125
-                }}
-              >
-                <View
+          {this.state.order && this.state.order.length ? (
+            this.state.order.map((Item, i) => {
+              return (
+                <TouchableOpacity
                   style={{
-                    width: "30%",
-                    borderWidth: 0,
-                    alignItems: "center",
-                    height: "100%",
-                    justifyContent: "center"
+                    width: "90%",
+                    backgroundColor: "#ffff",
+                    alignSelf: "center",
+                    borderRadius: 10,
+                    marginVertical: 8,
+                    paddingVertical: 15,
+                    overflow: "hidden",
+                    flexDirection: "row",
+                    elevation: 4,
+                    height: 125
                   }}
                 >
-                  <Image
-                    source={{ uri: Item.product.allImages.length && Item.product.allImages[0].path }}
-                    style={{ width: "90%", height: "90%" }}
-                    resizeMode="contain"
-                  />
-                </View>
-                <View
-                  style={{
-                    width: "50%",
-                    borderWidth: 0,
-                    paddingLeft: 5,
-                    justifyContent: "center"
-                  }}
-                >
-                  <Text
+                  <View
                     style={{
-                      fontSize: 16,
-                      color: "#585858",
-                      marginVertical: 5,
-                      fontWeight: "bold"
+                      width: "30%",
+                      borderWidth: 0,
+                      alignItems: "center",
+                      height: "100%",
+                      justifyContent: "center"
                     }}
                   >
-                    Order # {i + 1}
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    width: "20%",
-                    borderWidth: 0,
-                    paddingLeft: 5,
-                    justifyContent: "center",
-                    alignItems: "center"
-                  }}
-                >
-                  <FontAwesome5 name="arrow-right" size={20} color={"black"} />
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    position: "absolute",
-                    right: 10,
-                    top: 10
-                  }}
-                >
-                  <Text
+                    <Image
+                      source={{
+                        uri:
+                          Item.product.allImages.length &&
+                          Item.product.allImages[0].path
+                      }}
+                      style={{ width: "90%", height: "90%" }}
+                      resizeMode="contain"
+                    />
+                  </View>
+                  <View
                     style={{
-                      color:
-                        Item.status == "pending"
-                          ? "red"
-                          : Item.status == "delivered"
+                      width: "50%",
+                      borderWidth: 0,
+                      paddingLeft: 5,
+                      justifyContent: "center"
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        color: "#585858",
+                        marginVertical: 5,
+                        fontWeight: "bold"
+                      }}
+                    >
+                      Order # {i + 1}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      width: "20%",
+                      borderWidth: 0,
+                      paddingLeft: 5,
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <FontAwesome5
+                      name="arrow-right"
+                      size={20}
+                      color={"black"}
+                    />
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      position: "absolute",
+                      right: 10,
+                      top: 10
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color:
+                          Item.status == "pending"
+                            ? "red"
+                            : Item.status == "delivered"
                             ? "blue"
                             : Item.status == "cancelled"
-                              ? "black"
-                              : null
+                            ? "black"
+                            : null
+                      }}
+                    >
+                      {" "}
+                      {Item.status}{" "}
+                    </Text>
+                  </View>
+
+                  <Text
+                    style={{
+                      position: "absolute",
+                      fontSize: 10,
+                      bottom: 0,
+                      left: 80,
+                      color: "red"
                     }}
                   >
                     {" "}
-                    {Item.status}{" "}
+                    For Cancillation contact *:{" "}
+                    <Text style={{ fontSize: 15, color: "black" }}>
+                      03214371471{" "}
+                    </Text>
                   </Text>
-                </View>
-              </TouchableOpacity>
-            )
-          }) : <Text>There is no order</Text>}
+                </TouchableOpacity>
+              );
+            })
+          ) : (
+            <Text>There is no order</Text>
+          )}
         </ScrollView>
       </View>
     );

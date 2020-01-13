@@ -94,7 +94,7 @@ class Signup extends React.Component {
           }}
         >
           <Image
-            source={require("../../assets/images/adamlogo.png")}
+            source={require("../../assets/images/LogoSeedo.jpeg")}
             style={{ width: "70%", height: "100%" }}
             resizeMode="contain"
           />

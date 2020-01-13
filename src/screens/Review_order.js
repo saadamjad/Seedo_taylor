@@ -64,6 +64,7 @@ class Signup extends React.Component {
 
   componentDidMount() {
     this.setState({ data: this.props.navigation.state.params.data })
+    console.warn(this.props.navigation.state.params.data)
   }
 
   render() {

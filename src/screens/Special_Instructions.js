@@ -307,7 +307,11 @@ export default class Home extends React.Component {
               } else if (this.state.time === "") alert("select Time");
               else {
                 this.props.navigation.navigate("CheckOut", {
-                  //  index: this.props.navigation.state.params.index     yahan pe aik error ha dekhlena uncomment kr k
+                   index: this.props.navigation.state.params.index,
+                   data: {
+                      date: this.state.date,
+                      time: this.state.time    
+                   }
                 });
               }
             }}

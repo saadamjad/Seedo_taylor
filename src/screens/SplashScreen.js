@@ -12,12 +12,26 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 export default class SplashScreen extends React.Component {
   componentDidMount() {
-    AsyncStorage.getItem("isfirstTime", (error, err) => {
-      if (error  ) {
-        AsyncStorage.setItem("isfirstTime", true)
+    AsyncStorage.getItem("isfirstTime", (error, resulr) => {
+      if (error) {
+        alert("run")
+
       } else {
-      
-        this.props.navigation.navigate("Login")
+        if (resulr == null) {
+          AsyncStorage.setItem("isfirstTime", JSON.stringify(true), () => {
+          })
+        } else {
+          this.props.navigation.navigate("Login")
+        }
+        // AsyncStorage.removeItem("isfirstTime", (err, result) => {
+        //   if(err){
+
+        //   }else{
+        //     alert("run2")
+
+        //   }
+        // })
+
       }
 
     })

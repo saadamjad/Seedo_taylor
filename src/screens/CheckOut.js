@@ -79,9 +79,10 @@ class Signup extends React.Component {
         fullName: this.state.fullName,
         emailAddress: this.state.emailAddress,
         StreetAddress: this.state.StreetAddress,
-        //  country: this.state.country,
         city: this.state.city,
         ContactNo: this.state.ContactNo,
+        pickUpTime: this.props.navigation.state.params.data.time,
+        pickUpDate: this.props.navigation.state.params.data.date,
         product: this.props.reduxState.measurements[
           this.props.navigation.state.params.index
         ]
@@ -94,6 +95,7 @@ class Signup extends React.Component {
   };
 
   render() {
+    // console.warn(this.props.navigation.state.params.data.date)
     return (
       <Container
         style={{

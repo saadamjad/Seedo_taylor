@@ -127,7 +127,7 @@ const AppNavigator = createStackNavigator(
   },
 
   {
-    initialRouteName: "Specialinstructions"
+    initialRouteName: "Splash"
   }
 );
 

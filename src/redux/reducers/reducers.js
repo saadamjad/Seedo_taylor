@@ -46,18 +46,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         productsDiscriptions: action.payload,
-        measurements: [...state.measurements, action.payload]
+        measurements: [action.payload]
       };
     case actionTypes.EMPTY_MEASUREMENT:
       if (action.payload) {
-        // alert("run")
-        let mj = state.measurements;
-        mj.splice(action.payload, 1);
-        return {
-          ...state,
-          measurements: mj
-        };
-      } else {
+      
         return {
           ...state,
           measurements: []

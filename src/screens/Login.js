@@ -25,10 +25,10 @@ class Login extends React.Component {
     super();
     this.state = {
       check: true,
-      emailAddress: "",
-      password: "",
+      emailAddress: "saad@gmail.com",
+      password: "12345678",
       error: false,
-      validEmail: false
+      validEmail: true
     };
   }
 
@@ -46,13 +46,6 @@ class Login extends React.Component {
       this.props.reduxActions.login(this.props.navigation, userData);
     }
   };
-
-  // componentDidMount() {
-  //   I18nManager.forceRTL(true);
-  //   this.props.reduxActions.checkUser(this.props.navigation);
-
-  //   // alert("test " + I18nManager.isRTL);
-  // }
 
   render() {
     return (
@@ -196,8 +189,8 @@ class Login extends React.Component {
               alignSelf: "center",
               marginTop: 50
             }}
-         //   onPress={() => this.signin()}
-              onPress={() => this.props.navigation.navigate("Home")}
+           onPress={() => this.signin()}
+              // onPress={() => this.props.navigation.navigate("Home")}
           >
             <LinearGradient
               colors={["#eb2874", "#eb274b"]}

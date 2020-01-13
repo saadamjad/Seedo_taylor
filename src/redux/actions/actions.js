@@ -230,13 +230,10 @@ export const ProductDiscription = (
   dispatch({ type: actionTypes.PRODUCT_DISCRIPTIONS, payload: desctiption });
 };
 
-export const emptyMeasurement = (id
+export const emptyMeasurement = (
 ) => async dispatch => {
-  if(id){
-  dispatch({ type: actionTypes.EMPTY_MEASUREMENT, payload: id });
-  }else{
-    dispatch({ type: actionTypes.EMPTY_MEASUREMENT });
-  }
+  dispatch({ type: actionTypes.EMPTY_MEASUREMENT });
+ 
 };
 
 export const AddOrder = (data, navigation) =>

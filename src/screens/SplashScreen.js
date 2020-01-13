@@ -8,8 +8,20 @@ import {
   StatusBar
 } from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default class SplashScreen extends React.Component {
+  componentDidMount() {
+    AsyncStorage.getItem("isfirstTime", (error, err) => {
+      if (error  ) {
+        AsyncStorage.setItem("isfirstTime", true)
+      } else {
+      
+        this.props.navigation.navigate("Login")
+      }
+
+    })
+  }
   render() {
     return (
       <View
@@ -42,9 +54,6 @@ export default class SplashScreen extends React.Component {
                     style={{ width: "100%", height: "100%" }}
                   />
                 )
-
-                // title: "Onboarding"
-                // //  subtitle: "Done with React Native Onboarding Swiper"
               },
               {
                 backgroundColor: "blue",

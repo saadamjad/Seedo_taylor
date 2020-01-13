@@ -20,41 +20,45 @@ export default class Home extends React.Component {
   state = {
     LocalBrand: [
       {
-        ProductName: "special offer",
-
-        image: require("../../assets/images/kurta1.jpg")
-      },
-      {
         ProductName: "Daily Wear",
 
-        image: require("../../assets/images/Deadpool_Leather_Jacket.jpg")
+        Maleimage: require("../../assets/images/Deadpool_Leather_Jacket.jpg"),
+        FemaleImage: require("../../assets/images/dailywear.jpeg")
       },
       {
         ProductName: "Formal Wear",
 
-        image: require("../../assets/images/formal.jpg")
+        Maleimage: require("../../assets/images/formal.jpg"),
+        FemaleImage: require("../../assets/images/maxresdefault22.jpg")
       },
 
       {
         ProductName: "Party Wear",
 
-        image: require("../../assets/images/partywear.jpg")
+        Maleimage: require("../../assets/images/partywear.jpg"),
+        FemaleImage: require("../../assets/images/partywearrrr.jpg")
       },
       {
         ProductName: "Others",
 
-        image: require("../../assets/images/leatherr.jpg")
+        Maleimage: require("../../assets/images/leatherr.jpg"),
+        FemaleImage: require("../../assets/images/other.jpeg")
       }
       //   {
       //     ProductName: "Waste",
 
       //     image: require("../../assets/images/dummyimg(6).png")
       //   }
-    ]
+    ],
+    data: ""
   };
-componentDidMount(){
- // console.warn("navigation",this.props.navigation)
-}
+  componentDidMount() {
+    //  console.log("navigation", this.props.navigation.state.params.type);
+    var data = this.props.navigation.state.params.type;
+    //  console.warn("hellrro", data);
+    this.setState({ data });
+    //alert(data);
+  }
   render() {
     return (
       <View
@@ -62,6 +66,7 @@ componentDidMount(){
           flex: 1
         }}
       >
+        {/* <Text>ssss {this.state.data} </Text> */}
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <GloabalHeader
             navigation={this.props.navigation}
@@ -110,7 +115,10 @@ componentDidMount(){
                     elevation: 4
                   }}
                   onPress={() =>
-                    this.props.navigation.navigate("SelectAttaire", {type: Item.ProductName ,previousType: this.props.navigation.state.params.type} )
+                    this.props.navigation.navigate("SelectAttaire", {
+                      type: Item.ProductName,
+                      previousType: this.props.navigation.state.params.type
+                    })
                   }
                 >
                   <View
@@ -123,9 +131,14 @@ componentDidMount(){
                     }}
                   >
                     <Image
-                      source={(source = Item.image)}
-                      style={{ width: "70%", height: "80%" }}
-                      resizeMode="contain"
+                      source={
+                        (source =
+                          this.state.data == "Female"
+                            ? Item.FemaleImage
+                            : Item.Maleimage)
+                      }
+                      style={{ width: "100%", height: "100%" }}
+                      resizeMode="cover"
                     />
                   </View>
 

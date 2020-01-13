@@ -20,19 +20,19 @@ import { bindActionCreators } from "redux";
 import * as reduxActions from "../redux/actions/actions";
 import { connect } from "react-redux";
 
-
 class Home extends React.Component {
   state = {
-    LocalBrand:
-    {
-    }
+    LocalBrand: {}
   };
   componentWillMount() {
     // console.warn("sss", this.props.navigation);
-    if (this.props.reduxState.measurements && this.props.reduxState.measurements !== {}) {
+    if (
+      this.props.reduxState.measurements &&
+      this.props.reduxState.measurements !== {}
+    ) {
       this.setState({
         LocalBrand: this.props.reduxState.measurements
-      })
+      });
     }
   }
 
@@ -80,7 +80,9 @@ class Home extends React.Component {
                   elevation: 4
                 }}
                 onPress={() =>
-                  this.props.navigation.navigate("Specialinstructions",{index: data} )
+                  this.props.navigation.navigate("Specialinstructions", {
+                    index: data
+                  })
                 }
               >
                 <View

@@ -35,7 +35,7 @@ class Home extends React.Component {
     Allproducts: []
   };
   componentDidMount() {
-    console.warn("Get Navigation", this.props.navigation);
+    //console.warn("Get Navigation", this.props.navigation);
     this.props.reduxActions.GetProductapp();
   }
   componentWillReceiveProps(props) {
@@ -44,16 +44,12 @@ class Home extends React.Component {
       props.reduxState.products.filter(val => {
         // let ware = this.props.navigation.state.params.type;
         // console.warn(val.gender == this.props.navigation.state.params.previousType, val.ware, this.props.navigation.state.params.type)
+
         if (
           val.gender == this.props.navigation.state.params.previousType &&
           val.ware == this.props.navigation.state.params.type
         ) {
           Allproducts.push(val);
-          // console.log("this is vall", val);
-          // this.props.reduxActions.ProductDiscription(
-          //   this.props.navigation,
-          //   val
-          // );
         }
       });
       this.setState({
@@ -62,12 +58,9 @@ class Home extends React.Component {
     }
   }
 
-  goToDetailScreen = (val) => {
-    this.props.reduxActions.ProductDiscription(
-      this.props.navigation,
-      val
-    );
-  }
+  goToDetailScreen = val => {
+    this.props.reduxActions.ProductDiscription(this.props.navigation, val);
+  };
 
   render() {
     return (
@@ -95,7 +88,7 @@ class Home extends React.Component {
               backgroundColor: "white"
             }}
           >
-            {this.state.Allproducts ? (
+            {this.state.Allproducts.length ? (
               this.state.Allproducts.map((Item, data) => {
                 return (
                   <TouchableOpacity
@@ -109,7 +102,7 @@ class Home extends React.Component {
                       marginVertical: 2,
                       width: 140,
                       borderRadius: 10,
-                      paddingVertical: 10,
+                      // paddingVertical: 10,
                       overflow: "hidden",
                       shadowColor: "#f3f3f3",
                       marginBottom: 17,
@@ -124,12 +117,10 @@ class Home extends React.Component {
 
                       elevation: 4
                     }}
-                    onPress={() =>
-                      this.goToDetailScreen(Item)
-                    }
+                    onPress={() => this.goToDetailScreen(Item)}
                   >
                     <View
-                      style={{ height: "75%", width: "100%", borderWidth: 0 }}
+                      style={{ height: "100%", width: "100%", borderWidth: 0 }}
                     >
                       <Image
                         source={{ uri: Item.allImages[0].path }}
@@ -143,8 +134,8 @@ class Home extends React.Component {
                         borderBottomWidth: 1,
                         height: "25%",
                         borderColor: "red",
-                        color: "#eb768d",
-                        paddingVertical: 13
+                        color: "#eb768d"
+                        // paddingVertical: 13
                       }}
                     >
                       {Item.productName}
@@ -153,11 +144,11 @@ class Home extends React.Component {
                 );
               })
             ) : (
-                <View>
-                  {" "}
-                  <Text> No Products </Text>{" "}
-                </View>
-              )}
+              <Text style={{ color: "red", fontSize: 20 }}>
+                {" "}
+                No Products found{" "}
+              </Text>
+            )}
           </View>
         </ScrollView>
       </View>

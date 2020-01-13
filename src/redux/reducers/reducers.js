@@ -10,11 +10,11 @@ const initialState = {
   cart: { products: [], subTotal: 0, shipmentTotal: 0 },
   AIData: [],
   measurements: [],
-  productsDiscriptions: {}
-  , orders: []
+  productsDiscriptions: {},
+  orders: []
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case actionTypes.START_LOADING:
       return {
@@ -52,7 +52,7 @@ export default function (state = initialState, action) {
       if (action.payload) {
         // alert("run")
         let mj = state.measurements;
-        mj.splice(action.payload, 1)
+        mj.splice(action.payload, 1);
         return {
           ...state,
           measurements: mj
@@ -64,10 +64,9 @@ export default function (state = initialState, action) {
         };
       }
     case actionTypes.GET_ORDER:
-
       return {
         ...state,
-        orders: action.payload,
+        orders: action.payload
       };
 
     default:

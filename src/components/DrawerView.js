@@ -27,7 +27,7 @@ class DrawerView extends React.Component {
         style={[
           styles.container,
           {
-            backgroundColor: this.props.reduxState.theme.backgroundColor
+            backgroundColor: "white"
           }
         ]}
       >

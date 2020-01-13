@@ -16,8 +16,11 @@ import GloabalHeader from "../components/GlobalHeader";
 import LinearGradient from "react-native-linear-gradient";
 import Fontisto from "react-native-vector-icons/Fontisto";
 
+import DatePicker from "react-native-datepicker";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import TimePicker from "react-native-24h-timepicker";
 
+// import TimePicker from "react-time-picker";
 // import { Item } from "native-base";
 // import { ScrollView } from "react-native-gesture-handler";
 
@@ -45,8 +48,51 @@ export default class Home extends React.Component {
 
         image: require("../../assets/images/images(3).jpg")
       }
-    ]
+    ],
+    date: "2016-05-15",
+    time: "10:00"
+    // picker: false
   };
+  DateFunction() {
+    return (
+      <DatePicker
+        style={{ width: 200 }}
+        date={this.state.date}
+        mode="date"
+        placeholder="select date"
+        format="YYYY-MM-DD"
+        minDate="2016-05-01"
+        maxDate="2016-06-01"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: "absolute",
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={date => {
+          this.setState({ date: date });
+        }}
+        minDate="2020-01-01"
+        maxDate="2020-05-02"
+
+        // ref={picker => {
+        //   this.datePicker = picker;
+        // }}
+
+        // onOpenModal={true}
+        //  disabled={true}
+        // dateTouchBody={true}
+      />
+    );
+  }
 
   render() {
     return (
@@ -62,6 +108,13 @@ export default class Home extends React.Component {
             //  backgroundColor={this.props.reduxState.theme.backgroundColor}
             // RightCart={true}
             headingText="SPECIAL INSTRUCTIONS"
+          />
+          <TimePicker
+          // ref={ref => {
+          //   this.TimePicker = ref;
+          // }}
+          //  onCancel={() => this.onCancel()}
+          //  onConfirm={(hour, minute) => this.onConfirm(hour, minute)}
           />
           <Text
             style={{
@@ -102,19 +155,23 @@ export default class Home extends React.Component {
               paddingVertical: 10,
               marginVertical: 20,
               paddingLeft: 10,
-              paddingRight: 10
+              paddingRight: 10,
+              alignItems: "center"
             }}
           >
             <Text
               style={{
                 color: "#ea2962",
-                fontSize: 15
+                fontSize: 15,
+                marginBottom: 10,
+                textAlign: "center",
+                marginLeft: 10
                 // textAlign: "center"
               }}
             >
               select pick-up Date
             </Text>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={{
                 position: "absolute",
                 right: 15,
@@ -125,11 +182,61 @@ export default class Home extends React.Component {
                 alignItems: "center",
                 justifyContent: "center"
               }}
+              //   onPress={() => this.DateFunction()}
+              onPress={() => this.setState({ picker: !this.state.picker })}
             >
               <Fontisto name={"date"} size={20} color={"white"} />
             </TouchableOpacity>
+         */}
+            {this.DateFunction()}
           </View>
+
+          {/* 
+/// Time */}
+
           <View
+            style={{
+              justifyContent: "center",
+              paddingVertical: 10,
+              marginVertical: 20,
+              paddingLeft: 10,
+              paddingRight: 10,
+              alignItems: "center"
+            }}
+          >
+            <Text
+              style={{
+                color: "#ea2962",
+                fontSize: 15,
+                marginBottom: 10,
+                textAlign: "center",
+                marginLeft: 10
+                // textAlign: "center"
+              }}
+            >
+              select Time
+            </Text>
+            {/* <TouchableOpacity
+              style={{
+                position: "absolute",
+                right: 15,
+                width: 45,
+                height: 45,
+                borderRadius: 45,
+                backgroundColor: "#ea2962",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+              //   onPress={() => this.DateFunction()}
+              onPress={() => this.setState({ picker: !this.state.picker })}
+            >
+              <Fontisto name={"date"} size={20} color={"white"} />
+            </TouchableOpacity>
+         */}
+            {this.DateFunction()}
+          </View>
+
+          {/* <View
             style={{
               justifyContent: "center",
               paddingVertical: 10,
@@ -158,6 +265,7 @@ export default class Home extends React.Component {
                 alignItems: "center",
                 justifyContent: "center"
               }}
+              onPress={() => this.DateFunction}
             >
               <MaterialCommunityIcons
                 name={"update"}
@@ -166,6 +274,9 @@ export default class Home extends React.Component {
               />
             </TouchableOpacity>
           </View>
+        
+         */}
+
           <Text
             style={{
               color: "#ea2962",
@@ -208,7 +319,11 @@ export default class Home extends React.Component {
               alignSelf: "center",
               marginTop: 50
             }}
-            onPress={() => this.props.navigation.navigate("CheckOut", {index: this.props.navigation.state.params.index})}
+            onPress={() =>
+              this.props.navigation.navigate("CheckOut", {
+                index: this.props.navigation.state.params.index
+              })
+            }
           >
             <LinearGradient
               colors={["#eb2874", "#eb274b"]}

@@ -199,7 +199,6 @@ class Signup extends React.Component {
               marginTop: 50
             }}
             onPress={() => this.onsubmit()}
-          
           >
             <LinearGradient
               colors={["#eb2874", "#eb274b"]}

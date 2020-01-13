@@ -29,7 +29,7 @@ class Signup extends React.Component {
     emailAddress: "",
     password: "",
     StreetAddress: "",
-    country: "",
+    // country: "",
     city: "",
     ContactNo: "",
     checked: true,
@@ -55,21 +55,20 @@ class Signup extends React.Component {
         emailAddress: user.emailAddress,
         fullName: user.fullName,
         validEmail: true
-
-      })
+      });
     } else {
-      console.warn(this.props.reduxState)
+      // console.warn(this.props.reduxState);
     }
   }
 
   onsubmit = () => {
     if (
-      (this.state.fullName === "" ||
-        this.state.emailAddress === "" ||
-        this.state.StreetAddress === "" ||
-        this.state.country === "" ||
-        this.state.city === "" ||
-        this.state.ContactNo === "")
+      this.state.fullName === "" ||
+      this.state.emailAddress === "" ||
+      this.state.StreetAddress === "" ||
+      // this.state.country === "" ||
+      this.state.city === "" ||
+      this.state.ContactNo === ""
     ) {
       this.setState({ error: "Kindly Fill All The Fields" });
     } else if (this.state.validEmail === false) {
@@ -80,12 +79,17 @@ class Signup extends React.Component {
         fullName: this.state.fullName,
         emailAddress: this.state.emailAddress,
         StreetAddress: this.state.StreetAddress,
-        country: this.state.country,
+        //  country: this.state.country,
         city: this.state.city,
         ContactNo: this.state.ContactNo,
-        product: this.props.reduxState.measurements[this.props.navigation.state.params.index]
-      }
-      this.props.navigation.navigate("ReviewOrder", { data, index: this.props.navigation.state.params.index});
+        product: this.props.reduxState.measurements[
+          this.props.navigation.state.params.index
+        ]
+      };
+      this.props.navigation.navigate("ReviewOrder", {
+        data,
+        index: this.props.navigation.state.params.index
+      });
     }
   };
 
@@ -97,7 +101,11 @@ class Signup extends React.Component {
         }}
       >
         <Content>
-          <GloabalHeader headingText="CHECKOUT" arrow={true} />
+          <GloabalHeader
+            headingText="CHECKOUT"
+            arrow={true}
+            navigation={this.props.navigation}
+          />
           <View style={{ paddingLeft: 10, paddingRight: 10 }}>
             <Text
               style={{
@@ -139,7 +147,7 @@ class Signup extends React.Component {
                   style={{ borderBottomWidth: 0, marginTop: 0 }}
                   value={this.state.fullName}
                   onChangeText={text => this.setState({ fullName: text })}
-                // onChangeText={text => this.setState({ firstName: text })}
+                  // onChangeText={text => this.setState({ firstName: text })}
                 />
               </View>
               {/* <View
@@ -180,7 +188,6 @@ class Signup extends React.Component {
                   padding: 0
                 }}
                 value={this.state.emailAddress}
-
                 onChangeText={text => this.emailChange(text)}
               />
             </View>
@@ -205,7 +212,7 @@ class Signup extends React.Component {
                 onChangeText={text => this.setState({ StreetAddress: text })}
               />
             </View>
-            <View
+            {/* <View
               style={{
                 width: "100%",
                 borderBottomWidth: 0.5,
@@ -223,9 +230,9 @@ class Signup extends React.Component {
                   marginLeft: 0,
                   padding: 0
                 }}
-                onChangeText={text => this.setState({ country: text })}
+                onChangeText={text => this.setState({ city: text })}
               />
-            </View>
+            </View> */}
             <View
               style={{
                 width: "100%",
@@ -237,7 +244,7 @@ class Signup extends React.Component {
             >
               <Text style={{ color: "black" }}> city </Text>
               <TextInput
-                placeholder="enter Country"
+                placeholder="enter city"
                 style={{
                   borderBottomWidth: 0,
                   marginTop: 2,
@@ -267,6 +274,7 @@ class Signup extends React.Component {
                   padding: 0
                 }}
                 onChangeText={text => this.setState({ ContactNo: text })}
+                keyboardType="phone-pad"
               />
             </View>
 
@@ -351,7 +359,7 @@ class Signup extends React.Component {
                     marginLeft: 0,
                     padding: 0
                   }}
-                // onChangeText={text => this.setState({ ContactNo: text })}
+                  // onChangeText={text => this.setState({ ContactNo: text })}
                 />
               </View>
             </View>
@@ -363,7 +371,7 @@ class Signup extends React.Component {
                 marginTop: 20
               }}
               onPress={() => this.onsubmit()}
-            // onPress={() => this.props.navigation.navigate("ReviewOrder")}
+              // onPress={() => this.props.navigation.navigate("ReviewOrder")}
             >
               <LinearGradient
                 colors={["#eb2874", "#eb274b"]}

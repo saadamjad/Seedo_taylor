@@ -17,6 +17,7 @@ import * as reduxActions from "../redux/actions/actions";
 
 import { connect } from "react-redux";
 import Slideshow from "react-native-image-slider-show";
+
 class Home extends React.Component {
   state = {
     search: "",
@@ -70,9 +71,8 @@ class Home extends React.Component {
       {
         ProductName: "Female",
 
-        image: require("../../assets/images/images.jpg")
-      },
-     
+        image: require("../../assets/images/femailll.jpg")
+      }
     ]
   };
 
@@ -88,7 +88,7 @@ class Home extends React.Component {
       }, 3000)
     });
   }
-  componentDidMount(){
+  componentDidMount() {
     // console.warn("hello",this.props.navigation)
   }
 
@@ -110,14 +110,7 @@ class Home extends React.Component {
           // RightCart={true}
           headingText="Make Your selection"
         />
-        {/* <View style={{ height: 150, width: "90%", alignSelf: "center" }}> */}
-        {/* <Slideshow
-          dataSource={[
-            { url: "http://placeimg.com/640/480/any" },
-            { url: "http://placeimg.com/640/480/any" },
-            { url: "http://placeimg.com/640/480/any" }
-          ]}
-        /> */}
+
         <Slideshow
           dataSource={this.state.dataSource}
           position={this.state.position}
@@ -145,14 +138,14 @@ class Home extends React.Component {
                   backgroundColor: "white",
                   alignItems: "center",
                   justifyContent: "center",
-                  marginVertical: 2,
+                  marginVertical: 30,
                   width: 150,
                   borderRadius: 10,
                   paddingVertical: 10,
                   overflow: "hidden",
                   shadowColor: "#f3f3f3",
                   marginBottom: 17,
-                  height: 100,
+                  height: 170,
 
                   shadowOffset: {
                     width: 0,
@@ -163,9 +156,13 @@ class Home extends React.Component {
 
                   elevation: 4
                 }}
-                onPress={() => this.props.navigation.navigate("SelectCategory", {type: Item.ProductName })}
+                onPress={() =>
+                  this.props.navigation.navigate("SelectCategory", {
+                    type: Item.ProductName
+                  })
+                }
               >
-                <View style={{ height: "75%", width: "100%", borderWidth: 0 }}>
+                <View style={{ height: "80%", width: "100%", borderWidth: 0 }}>
                   <Image
                     source={(source = Item.image)}
                     style={{ width: "100%", height: "100%" }}
@@ -176,7 +173,8 @@ class Home extends React.Component {
                 <Text
                   style={{
                     borderBottomWidth: 1,
-                    height: "25%",
+                    paddingVertical: 5,
+                    height: "20%",
                     borderColor: "red",
                     color: "#eb768d"
                   }}

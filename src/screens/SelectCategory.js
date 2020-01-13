@@ -99,7 +99,7 @@ export default class Home extends React.Component {
                     marginVertical: 2,
                     width: 140,
                     borderRadius: 10,
-                    paddingVertical: 10,
+                    //  paddingVertical: 10,
                     overflow: "hidden",
                     shadowColor: "#f3f3f3",
                     marginBottom: 17,

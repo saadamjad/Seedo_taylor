@@ -49,8 +49,8 @@ export default class Home extends React.Component {
         image: require("../../assets/images/images(3).jpg")
       }
     ],
-    date: "2016-05-15",
-    time: "10:00"
+    date: "",
+    time: ""
     // picker: false
   };
   DateFunction() {
@@ -93,6 +93,14 @@ export default class Home extends React.Component {
       />
     );
   }
+  onCancel() {
+    this.TimePicker.close();
+  }
+
+  onConfirm(hour, minute) {
+    this.setState({ time: `${hour}:${minute}` });
+    this.TimePicker.close();
+  }
 
   render() {
     return (
@@ -101,6 +109,16 @@ export default class Home extends React.Component {
           flex: 1
         }}
       >
+        <TimePicker
+          ref={ref => {
+            this.TimePicker = ref;
+          }}
+          onCancel={() => this.onCancel()}
+          onConfirm={(hour, minute) => this.onConfirm(hour, minute)}
+          itemStyle={{ color: "red" }}
+          maxHour={12}
+        />
+
         <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 20 }}>
           <GloabalHeader
             navigation={this.props.navigation}
@@ -108,13 +126,6 @@ export default class Home extends React.Component {
             //  backgroundColor={this.props.reduxState.theme.backgroundColor}
             // RightCart={true}
             headingText="SPECIAL INSTRUCTIONS"
-          />
-          <TimePicker
-          // ref={ref => {
-          //   this.TimePicker = ref;
-          // }}
-          //  onCancel={() => this.onCancel()}
-          //  onConfirm={(hour, minute) => this.onConfirm(hour, minute)}
           />
           <Text
             style={{
@@ -148,7 +159,6 @@ export default class Home extends React.Component {
             select date and time for when a rider is comming to the designated
             address to pickup the sizes from the house
           </Text>
-
           <View
             style={{
               justifyContent: "center",
@@ -190,92 +200,64 @@ export default class Home extends React.Component {
          */}
             {this.DateFunction()}
           </View>
-
           {/* 
 /// Time */}
-
+          <Text
+            style={{
+              color: "#ea2962",
+              fontSize: 15,
+              // marginBottom: 10,
+              textAlign: "center",
+              marginLeft: 10
+              // textAlign: "center"
+            }}
+          >
+            select Time
+          </Text>
           <View
             style={{
               justifyContent: "center",
-              paddingVertical: 10,
-              marginVertical: 20,
+              // paddingVertical: 10,
+              //  marginVertical: 20,
               paddingLeft: 10,
               paddingRight: 10,
-              alignItems: "center"
-            }}
-          >
-            <Text
-              style={{
-                color: "#ea2962",
-                fontSize: 15,
-                marginBottom: 10,
-                textAlign: "center",
-                marginLeft: 10
-                // textAlign: "center"
-              }}
-            >
-              select Time
-            </Text>
-            {/* <TouchableOpacity
-              style={{
-                position: "absolute",
-                right: 15,
-                width: 45,
-                height: 45,
-                borderRadius: 45,
-                backgroundColor: "#ea2962",
-                alignItems: "center",
-                justifyContent: "center"
-              }}
-              //   onPress={() => this.DateFunction()}
-              onPress={() => this.setState({ picker: !this.state.picker })}
-            >
-              <Fontisto name={"date"} size={20} color={"white"} />
-            </TouchableOpacity>
-         */}
-            {this.DateFunction()}
-          </View>
+              alignItems: "center",
+              flexDirection: "row",
 
-          {/* <View
-            style={{
-              justifyContent: "center",
-              paddingVertical: 10,
-              //   marginVertical: 20,
-              paddingLeft: 10,
-              paddingRight: 10
+              marginRight: 10
             }}
           >
-            <Text
-              style={{
-                color: "#ea2962",
-                fontSize: 15
-                // textAlign: "center"
-              }}
-            >
-              select pick-up Time
-            </Text>
             <TouchableOpacity
               style={{
-                position: "absolute",
-                right: 15,
+                //  position: "absolute",
+                //  right: 15,
                 width: 45,
                 height: 45,
                 borderRadius: 45,
-                backgroundColor: "#ea2962",
+                //  backgroundColor: "#ea2962",
                 alignItems: "center",
                 justifyContent: "center"
               }}
-              onPress={() => this.DateFunction}
+              onPress={() => this.TimePicker.open()}
             >
-              <MaterialCommunityIcons
-                name={"update"}
-                size={20}
-                color={"white"}
-              />
+              <Fontisto name={"date"} size={20} color={"red"} />
             </TouchableOpacity>
+            <Text
+              style={{
+                color: "#DCD9D9",
+                textAlignVertical: "center",
+                fontSize: 18,
+                width: 160,
+                height: 40,
+                borderWidth: 1,
+                textAlign: "center",
+                borderColor: "#959494"
+              }}
+              // placeholder="ssss"
+            >
+              {this.state.time}
+            </Text>
           </View>
-        
-         */}
 
           <Text
             style={{
@@ -319,11 +301,16 @@ export default class Home extends React.Component {
               alignSelf: "center",
               marginTop: 50
             }}
-            onPress={() =>
-              this.props.navigation.navigate("CheckOut", {
-                index: this.props.navigation.state.params.index
-              })
-            }
+            onPress={() => {
+              if (this.state.date === "") {
+                alert("  select Date");
+              } else if (this.state.time === "") alert("select Time");
+              else {
+                this.props.navigation.navigate("CheckOut", {
+                  //  index: this.props.navigation.state.params.index     yahan pe aik error ha dekhlena uncomment kr k
+                });
+              }
+            }}
           >
             <LinearGradient
               colors={["#eb2874", "#eb274b"]}

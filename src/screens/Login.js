@@ -74,7 +74,7 @@ class Login extends React.Component {
             }}
           >
             <Image
-              source={require("../../assets/images/adamlogo.png")}
+              source={require("../../assets/images/LogoSeedo.jpeg")}
               style={{ width: "100%", height: "100%" }}
               resizeMode="contain"
             />
@@ -87,7 +87,7 @@ class Login extends React.Component {
               paddingVertical: 23
             }}
           >
-            Loginnnn
+            Login
           </Text>
           <View
             style={{
@@ -216,87 +216,6 @@ class Login extends React.Component {
               </Text>
             </LinearGradient>
           </TouchableOpacity>
-
-          {/* <TouchableOpacity
-            style={{
-              height: 43,
-              shadowOffset: {
-                width: 0,
-                height: 4
-              },
-              shadowOpacity: 0.52,
-              shadowRadius: 5,
-
-              elevation: 2,
-              height: 40,
-              alignItems: "center",
-              flexDirection: "row",
-              justifyContent: "center",
-              backgroundColor: "white",
-              marginTop: 20,
-              width: "80%",
-              borderRadius: 30,
-              alignSelf: "center"
-            }}
-          >
-            <View
-              style={{
-                height: 30,
-                width: 30,
-                position: "absolute",
-                left: 20,
-                justifyContent: "center"
-              }}
-            >
-              <Image
-                source={require("../../assets/images/facebook.png")}
-                style={{ width: "90%", height: "90%" }}
-                resizeMode="contain"
-              />
-            </View>
-            <Text style={{ color: "#eb2874" }}>Facebook</Text>
-          </TouchableOpacity> */}
-
-          {/* <TouchableOpacity
-            style={{
-              height: 43,
-              shadowOffset: {
-                width: 0,
-                height: 4
-              },
-              shadowOpacity: 0.52,
-              shadowRadius: 5,
-
-              elevation: 2,
-              height: 40,
-              alignItems: "center",
-              flexDirection: "row",
-              justifyContent: "center",
-              backgroundColor: "white",
-              marginTop: 10,
-              width: "80%",
-              borderRadius: 30,
-              alignSelf: "center"
-            }}
-          >
-            <View
-              style={{
-                height: 30,
-                width: 30,
-                position: "absolute",
-                left: 20,
-                justifyContent: "center",
-                overflow: "hidden"
-              }}
-            >
-              <Image
-                source={require("../../assets/images/gmail3.jpg")}
-                style={{ width: "90%", height: "90%" }}
-                resizeMode="contain"
-              />
-            </View>
-            <Text style={{ color: "#eb2874" }}>Gmail</Text>
-          </TouchableOpacity> */}
 
           <Text style={{ marginTop: 10, color: "red", textAlign: "center" }}>
             {this.state.error ? this.state.error : null}

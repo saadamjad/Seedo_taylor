@@ -179,32 +179,12 @@ class DrawerView extends React.Component {
             flexDirection: "row"
           }}
         >
-          <View
-            style={{
-              width: "70%",
-              flexDirection: "row",
-              alignItems: "center",
-              paddingLeft: 15
-            }}
-          >
-            <FontAwesome name="cut" size={15} color={"pink"} />
-            <Text
-              style={{
-                fontSize: 12,
-                color: this.props.reduxState.theme.simpleText,
-                marginLeft: 10
-              }}
-            >
-              {" "}
-              Registered as Tailor{" "}
-            </Text>
-          </View>
           <TouchableOpacity
             style={{
-              width: "30%",
+              width: "100%",
               flexDirection: "row",
-              justifyContent: "center",
-              paddingRight: 10
+              // justifyContent: "center",
+              paddingLeft: 30
             }}
             onPress={() => {
               this.props.hideDrawer();

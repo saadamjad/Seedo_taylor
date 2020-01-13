@@ -16,8 +16,11 @@ import LinearGradient from "react-native-linear-gradient";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { Item } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
+import { bindActionCreators } from "redux";
+import * as reduxActions from "../redux/actions/actions";
+import { connect } from "react-redux";
 
-export default class Home extends React.Component {
+class Profile extends React.Component {
   state = {
     LocalBrand: [
       {
@@ -93,7 +96,7 @@ export default class Home extends React.Component {
             }}
           >
             {" "}
-            Edit profile{" "}
+            {this.props.reduxState.userData.fullName}{" "}
           </Text>
           <View
             style={{
@@ -114,34 +117,14 @@ export default class Home extends React.Component {
                 }}
               >
                 {" "}
-                First Name{" "}
+                Name{" "}
               </Text>
               <Text style={{ fontSize: 13, color: "#b7b7b7", marginLeft: 3 }}>
                 {" "}
-                Ahtisham
+                {this.props.reduxState.userData.fullName}
               </Text>
             </View>
-            <View
-              style={{
-                marginTop: 10
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: "#959595",
-                  fontWeight: "400",
-                  marginVertical: 5
-                }}
-              >
-                {" "}
-                Last Name{" "}
-              </Text>
-              <Text style={{ fontSize: 13, color: "#b7b7b7", marginLeft: 3 }}>
-                {" "}
-                Malik
-              </Text>
-            </View>
+
             <View
               style={{
                 marginTop: 10
@@ -160,58 +143,15 @@ export default class Home extends React.Component {
               </Text>
               <Text style={{ fontSize: 13, color: "#b7b7b7", marginLeft: 3 }}>
                 {" "}
-                Ahtisham@gmail.com
+                {this.props.reduxState.userData.emailAddress}
               </Text>
             </View>
 
-            <View
-              style={{
-                marginTop: 10
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: "#959595",
-                  fontWeight: "400",
-                  marginVertical: 5
-                }}
-              >
-                {" "}
-                Password{" "}
-              </Text>
-              <Text style={{ fontSize: 13, color: "#b7b7b7", marginLeft: 3 }}>
-                {" "}
-                *******
-              </Text>
-            </View>
-
-            <View
-              style={{
-                marginTop: 10
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: "#959595",
-                  fontWeight: "400",
-                  marginVertical: 5
-                }}
-              >
-                {" "}
-                Confirm Password{" "}
-              </Text>
-              <Text style={{ fontSize: 13, color: "#b7b7b7", marginLeft: 3 }}>
-                {" "}
-                *******
-              </Text>
-            </View>
             <TouchableOpacity
               style={{
                 width: "80%",
                 alignSelf: "center",
-                marginTop: 20
+                marginTop: 100
               }}
               onPress={() => this.props.navigation.navigate("CheckOut")}
             >
@@ -245,3 +185,13 @@ export default class Home extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  reduxState: state.reducers
+});
+
+const mapDispatchToProps = dispatch => ({
+  reduxActions: bindActionCreators(reduxActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
